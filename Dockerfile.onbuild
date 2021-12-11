@@ -1,6 +1,7 @@
 FROM node:14-alpine
 RUN yarn global add gatsby-cli && gatsby telemetry --disable
 ONBUILD WORKDIR /app
-ONBUILD ADD . ./
-ONBUILD RUN yarn
-ONBUILD RUN gatsby build
+ONBUILD COPY package.json ./
+ONBUILD RUN yarn --production --non-interactive
+ONBUILD COPY . ./
+ONBUILD RUN yarn build
